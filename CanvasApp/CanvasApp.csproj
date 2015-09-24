@@ -65,9 +65,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Aula01\Images\uwqfC.gif" />
+    <Content Include="Aula01\Index.html" />
+    <Content Include="Aula01\Music\Terra%27s Theme.mp3" />
     <Content Include="packages.config" />
     <None Include="Scripts\jquery-2.1.0.intellisense.js" />
     <None Include="Scripts\jquery-2.1.0-vsdoc.js" />
+    <Content Include="Aula01\index.js" />
     <Content Include="Scripts\jquery-2.1.0.js" />
     <Content Include="Scripts\jquery-2.1.0.min.js" />
     <Content Include="Web.config" />
