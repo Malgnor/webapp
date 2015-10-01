@@ -1,68 +1,109 @@
 ﻿/// <reference path="../Scripts/jquery-2.1.0-vsdoc.js" />
 
+//var inimigo = {
+//    x: 0,
+//    y: 0,
+//    desenhar: function () {
+
+//    }
+//};
+
+//function Inimigo(x, y) {
+//    this.x = x;
+//    this.y = y;
+
+//    return this;
+//}
+
+//Inimigo.prototype.desenhar = function () {
+
+//};
+
+var game = {}
+
 $().ready(function () {
     var canvas = $("#testcanvas")[0];
     var context = canvas.getContext('2d');
-
-    //context.fillStyle = "#F00";
-    //context.fillRect(200, 10, 100, 100);
-
-    //context.strokeStyle = "#00F";
-    //context.strokeRect(110, 10, 50, 50);
-    //context.clearRect(210, 20, 30, 20);
-
-    //context.beginPath();
-    //context.arc(100, 300, 40, Math.PI, false);
-    //context.closePath();
-    //context.fill();
-
-    //context.beginPath();
-    //context.moveTo(170, 160);
-    //context.lineTo(170, 220);
-    //context.lineTo(300, 220);
-    //context.closePath();
-    //context.stroke();
-
-    //context.save();
-    //context.translate(300, 80);
-    //context.scale(-1, 1);
-    //context.fillStyle = "#000";
-    //context.font = "20 pt Arial";
-    //context.fillText("Hello world!", 0, 0);
-    //context.restore();
-
-    //context.fillStyle = "rgba(0, 255, 0, 0.3)";
-    //context.fillRect(240, 40, 100, 100);
-
-    //var image = $("#dragon")[0];
+    game.context = context;
+    game.canvas = canvas;
     var image = new Image();
     image.src = "Images/uwqfC.gif";
     image.onload = function () {
-
-        var xx = image.width / 10;
-        var yy = image.height / 8;
-        context.drawImage(image, 0, 0);
-        context.drawImage(image, 0, 50, 100, 25);
-        context.drawImage(image, xx * 2, yy * 7, xx, yy, 0, 70, xx, yy);
-        var x = 0;
+        game.x = 0;
+        game.y = 0;
+        game.xx = image.width / 10;
+        game.yy = image.height / 8;
         setInterval(function () {
-            context.clearRect(0, 0, canvas.width, canvas.height);
-            for (var i = 0; i < 8; i++) {
-                context.drawImage(image, xx * x, yy * i, xx, yy, xx * i, 0, xx, yy);
+            if (Keys.isDown(Keys.A)) {
+                game.x--;
             }
-            x = (x + 1) % 10;
+            if (Keys.isDown(Keys.D)) {
+                game.x++;
+            }
+            if (Keys.isDown(Keys.W)) {
+                game.y--;
+            }
+            if (Keys.isDown(Keys.S)) {
+                game.y++;
+            }
         }, 16);
-
+        window.requestAnimationFrame(desenhar);
     };
 
+    game.image = image;
     var musica = new Audio();
 
     if (musica.canPlayType("audio/mp3") != "") {
         musica.oncanplaythrough = function () {
-            alert("Musica foi carregada");
             musica.play();
         }
     }
 
     musica.src = "Music/Terra's Theme.mp3";
+
+    document.addEventListener("keydown", function (event) { event.preventDefault(); Keys.onKeydown(event); }, false);
+    document.addEventListener("keyup", function (event) { event.preventDefault(); Keys.onKeyup(event); }, false);
+
 });
+
+function desenhar() {
+    game.context.clearRect(0, 0, game.canvas.width, game.canvas.height);
+    game.context.drawImage(game.image, game.xx, game.yy, game.xx, game.yy, game.x, game.y, game.xx, game.yy);
+    window.requestAnimationFrame(desenhar);
+}
+
+var Keys = {
+    _pressed: {},
+
+    BACKSPACE: 8, TAB: 9, ENTER: 13, SHIFT: 16, CTRL: 17, ALT: 18,
+    PAUSE: 19, BREAK: 19, CAPS: 20, ESC: 27, SPACE: 32, PAGE_UP: 33,
+    PAGE_DOWN: 34, LEFT: 37, UP: 38, RIGHT: 39, DOWN: 40, INS: 45, DEL: 46,
+    K0: 48, K1: 49, K2: 50, K3: 51, K4: 52,
+    K5: 53, K6: 54, K7: 55, K8: 56, K9: 57,
+    A: 65, B: 66, C: 67, D: 68, E: 69, F: 70, G: 71, H: 72, I: 73,
+    J: 74, K: 75, L: 76, M: 77, N: 78, O: 79, P: 80, Q: 81, R: 82,
+    S: 83, T: 84, U: 85, V: 86, W: 87, X: 88, Y: 89, Z: 90,
+    N0: 96, N1: 97, N2: 98, N3: 99, N4: 100,
+    N5: 101, N6: 102, N7: 103, N8: 104, N9: 105,
+    TIMES: 106, PLUS: 107, MINUS: 106, DECIMAL: 110, DIVIDE: 111,
+    F1: 112, F2: 113, F3: 114, F4: 115, F5: 116, F7: 117,
+    F8: 118, F9: 119, F10: 120, F11: 121, F12: 122,
+    NUM_LOCK: 144, SCRL_LOCK: 115,
+
+    isDown: function (keyCode) {
+        return this._pressed[keyCode];
+    },
+
+    isDownOnce: function (keyCode) {
+        var b = this._pressed[keyCode]
+        delete this._pressed[keyCode];
+        return b;
+    },
+    onKeydown: function (event) {
+        this._pressed[event.keyCode] = true;
+    },
+    onKeyup: function (event) {
+        event.preventDefault();
+        delete this._pressed[event.keyCode];
+    }
+};
