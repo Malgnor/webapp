@@ -1,0 +1,32 @@
+﻿@using Lista.Models
+@model List<Jogo>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Lista</title>
+</head>
+<body>
+    <div>
+
+        @foreach (Jogo jogo in Model)
+        {
+            <div>
+                <h2>@jogo.Nome</h2>
+                <p>@jogo.Preço</p>
+                <a href="Detalhe/@(jogo.Id)">
+                    <img src="~/Imagens/@(jogo.Id).jpg" height="100" />
+                    Detalhe
+                </a>
+            </div>
+        }
+            
+    </div>
+</body>
+</html>

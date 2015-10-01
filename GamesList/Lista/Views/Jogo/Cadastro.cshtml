@@ -1,0 +1,49 @@
+﻿@model Lista.Models.Jogo
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Cadastro</title>
+</head>
+<body>
+    <div>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div>
+        @Html.LabelFor(m => m.Nome)
+        @Html.EditorFor(m => m.Nome)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Preço)
+        @Html.EditorFor(m => m.Preço)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.IdadeMinima)
+        @Html.EditorFor(m => m.IdadeMinima)
+    </div>
+
+    <input type="submit" value="Salvar" />
+}
+        @*<form action="Incluir" method="post">
+        <label>
+            Nome:
+            <input type="text" name="Nome" value="@(Model.Nome)" />
+        </label>
+        <label>
+            Preço:
+            <input type="text" name="Preço" value="@(Model.Preço)" />
+        </label>
+
+        @Html.ValidationMessageFor(m => m.Nome)
+
+    </form>*@
+    </div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Corfirmacao de idade</title>
+</head>
+<body>
+    <div>
+@using (Html.BeginForm())
+{
+    @Html.CheckBox("maior", false)
+    <div>Tenho mais de 18 anos.</div>
+    <input type="submit" value="Confirmar"/>
+
+}
+    </div>
+</body> 
+</html>

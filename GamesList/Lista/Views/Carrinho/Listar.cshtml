@@ -1,0 +1,28 @@
+﻿@model Lista.Models.Carrinho
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Listar</title>
+</head>
+<body>
+    <div>
+        @foreach (Lista.Models.Jogo jogo in Model.jogos)
+        {
+            <div>
+                <h2>@jogo.Nome</h2>
+                <img src="~/Imagens/@(jogo.Id).jpg" />
+                <p>Preço: @jogo.Preço</p>
+                <p>
+                    @Html.ActionLink("Remover jogo", "Remover", new { Id = jogo.Id })
+                </p>
+            </div>
+        }
+    </div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+﻿@using Lista.Models
+@model Jogo
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Detalhe - @Model.Nome</title>
+</head>
+<body>
+    <div>
+        <h2>@Model.Nome</h2>
+        <img src="~/Imagens/@(Model.Id).jpg"/>
+        <a href="/Jogo/Carrinho/@(Model.Id)">Comprar</a>
+        <p>Preço: @Model.Preço</p>
+    </div>
+    <div>
+        @if(Model.Id > 1){
+            <a href="@(Model.Id-1)">Anterior</a>
+        }
+        @if(Model.Id < 3){
+            <a href="@(Model.Id+1)">Próximo</a>
+        }
+    </div>
+</body>
+</html>
