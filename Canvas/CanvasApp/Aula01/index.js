@@ -1,24 +1,5 @@
 ﻿/// <reference path="../Scripts/jquery-2.1.0-vsdoc.js" />
-
-//var inimigo = {
-//    x: 0,
-//    y: 0,
-//    desenhar: function () {
-
-//    }
-//};
-
-//function Inimigo(x, y) {
-//    this.x = x;
-//    this.y = y;
-
-//    return this;
-//}
-
-//Inimigo.prototype.desenhar = function () {
-
-//};
-
+// context.drawImage(img,sx,sy,swidth,sheight,x,y,width,height);
 var game = {}
 
 $().ready(function () {
@@ -26,31 +7,24 @@ $().ready(function () {
     var context = canvas.getContext('2d');
     game.context = context;
     game.canvas = canvas;
-    var image = new Image();
-    image.src = "Images/uwqfC.gif";
-    image.onload = function () {
-        game.x = 0;
-        game.y = 0;
-        game.xx = image.width / 10;
-        game.yy = image.height / 8;
-        setInterval(function () {
-            if (Keys.isDown(Keys.A)) {
-                game.x--;
-            }
-            if (Keys.isDown(Keys.D)) {
-                game.x++;
-            }
-            if (Keys.isDown(Keys.W)) {
-                game.y--;
-            }
-            if (Keys.isDown(Keys.S)) {
-                game.y++;
-            }
-        }, 16);
-        window.requestAnimationFrame(desenhar);
-    };
-
-    game.image = image;
+    game.dragon = new Sprite(50, 50, "Images/uwqfC.gif", 75, 70);
+    game.dragon2 = new Sprite(150, 50, "Images/uwqfC.gif", 75, 70);
+    setInterval(function () {
+        game.dragon2.x++;
+        if (Keys.isDown(Keys.A)) {
+            game.dragon.x--;
+        }
+        if (Keys.isDown(Keys.D)) {
+            game.dragon.x++;
+        }
+        if (Keys.isDown(Keys.W)) {
+            game.dragon.y--;
+        }
+        if (Keys.isDown(Keys.S)) {
+            game.dragon.y++;
+        }
+    }, 16);
+    window.requestAnimationFrame(desenhar);
     var musica = new Audio();
 
     if (musica.canPlayType("audio/mp3") != "") {
@@ -68,7 +42,8 @@ $().ready(function () {
 
 function desenhar() {
     game.context.clearRect(0, 0, game.canvas.width, game.canvas.height);
-    game.context.drawImage(game.image, game.xx, game.yy, game.xx, game.yy, game.x, game.y, game.xx, game.yy);
+    game.dragon.Draw();
+    game.dragon2.Draw();
     window.requestAnimationFrame(desenhar);
 }
 
@@ -107,3 +82,22 @@ var Keys = {
         delete this._pressed[event.keyCode];
     }
 };
+
+function Sprite(x, y, sourceImage, width, height) {
+    var self = this;
+    this.x = x;
+    this.y = y;
+    this.imageLoaded = false;
+    this.image = new Image();
+    this.image.onload = function () {
+        self.width = width || self.image.width;
+        self.height = height || self.image.height;
+        self.imageLoaded = true;
+    }
+    this.image.src = sourceImage;
+}
+
+Sprite.prototype.Draw = function () {
+    if(this.imageLoaded)
+        game.context.drawImage(this.image, 0, 0, this.width, this.height, this.x, this.y, this.width, this.height);
+}
