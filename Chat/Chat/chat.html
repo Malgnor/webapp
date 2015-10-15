@@ -3,6 +3,35 @@
 <head>
     <title></title>
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript">
+        $().ready(function () {
+            var usuario;
+            usuario = prompt("Informe seu apelido: ", "Usuario");
+
+            var url = 'ws://localhost:1606/api/Chat?usuario=' + usuario;
+            var ws = new WebSocket(url);
+            ws.onopen = function (event) {
+                $("#mensagens").prepend("<p>Conectado!</p>");
+            };
+
+            ws.onerror = function (event) {
+                $("#mensagens").prepend("<p>Erro: " + event.data + "</p");
+            };
+
+            ws.onmessage = function (event) {
+                $("#mensagens").prepend("<p>" + event.data + "</p>");
+            }
+
+            $("#enviar-mensagem").click(function (event) {
+                var msg = $("#mensagem").val();
+
+                ws.send(msg);
+                msg.val('');
+
+                event.preventDefault();
+            });
+        });
+    </script>
 </head>
 <body>
     <form>
@@ -12,5 +41,8 @@
             <button id="enviar-mensagem">Enviar</button>
         </label>
     </form>
+    <div id="mensagens">
+
+    </div>
 </body>
 </html>
