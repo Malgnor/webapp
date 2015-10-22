@@ -1,0 +1,23 @@
+﻿@model MyGame.Models.LiGames
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>PartidasAbertas</title>
+</head>
+<body>
+    <div> 
+        @foreach (MyGame.Models.Game m in Model.lista)
+        {
+            @Html.ActionLink("Partida " + @m.Codigo, "ContinuarPartida", new { id = @m.Codigo })
+            <br />
+        }
+    </div>
+</body>
+</html>

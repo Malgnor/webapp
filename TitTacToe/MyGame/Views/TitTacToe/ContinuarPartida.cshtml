@@ -1,0 +1,324 @@
+﻿@model MyGame.Models.sendGame
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ContinuarPartida</title>
+</head>
+<body>
+    <div>
+        <p>
+            @if (Model.jogo.Jogador1 == Model.online.Code)
+            {
+                @Html.Label("Você é o X.")
+            }
+            else
+            {
+                @Html.Label("Você é o 0.")
+            }
+        </p>
+        <p>
+            @if (Model.jogo.Vencedor > 0)
+            {
+                if (Model.jogo.Vencedor==Model.online.Code)
+                {
+                    @Html.Label("Você venceu!")
+                } else
+                {
+                    @Html.Label("Você Perdeu!")
+                }
+            }
+        </p>
+        @if (@Model.jogo.Vencedor == 0 && @Model.jogo.Next == @Model.online.Code)
+        {
+        <table>
+            <tr>
+                <td>
+                    @if (@Model.jogo.Jogadas[0] == 0)
+                    {
+                        @Html.ActionLink("+", "ModPartida", new { codigo = Model.jogo.Codigo, posicao = 0 })
+                    }
+                    else if (@Model.jogo.Jogadas[0] == 1)
+                    {
+                        @Html.Label("X");
+                    }
+                    else
+                    {
+                        @Html.Label("0");
+                    }
+
+                </td>
+                <td>
+                    @if (@Model.jogo.Jogadas[1] == 0)
+                    {
+                        @Html.ActionLink("+", "ModPartida", new { codigo = Model.jogo.Codigo, posicao = 1 })
+                    }
+                    else if (@Model.jogo.Jogadas[1] == 1)
+                    {
+                        @Html.Label("X");
+                    }
+                    else
+                    {
+                        @Html.Label("0");
+                    }
+
+                </td>
+                <td>
+                    @if (@Model.jogo.Jogadas[2] == 0)
+                    {
+                        @Html.ActionLink("+", "ModPartida", new { codigo = Model.jogo.Codigo, posicao = 2 })
+                    }
+                    else if (@Model.jogo.Jogadas[2] == 1)
+                    {
+                        @Html.Label("X");
+                    }
+                    else
+                    {
+                        @Html.Label("0");
+                    }
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @if (@Model.jogo.Jogadas[3] == 0)
+                    {
+                        @Html.ActionLink("+", "ModPartida", new { codigo = Model.jogo.Codigo, posicao = 3 })
+                    }
+                    else if (@Model.jogo.Jogadas[3] == 1)
+                    {
+                        @Html.Label("X");
+                    }
+                    else
+                    {
+                        @Html.Label("0");
+                    }
+
+                </td>
+                <td>
+                    @if (@Model.jogo.Jogadas[4] == 0)
+                    {
+                        @Html.ActionLink("+", "ModPartida", new { codigo = Model.jogo.Codigo, posicao = 4 })
+                    }
+                    else if (@Model.jogo.Jogadas[4] == 1)
+                    {
+                        @Html.Label("X");
+                    }
+                    else
+                    {
+                        @Html.Label("0");
+                    }
+
+                </td>
+                <td>
+                    @if (@Model.jogo.Jogadas[5] == 0)
+                    {
+                        @Html.ActionLink("+", "ModPartida", new { codigo = Model.jogo.Codigo, posicao = 5 })
+                    }
+                    else if (@Model.jogo.Jogadas[5] == 1)
+                    {
+                        @Html.Label("X");
+                    }
+                    else
+                    {
+                        @Html.Label("0");
+                    }
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @if (@Model.jogo.Jogadas[6] == 0)
+                    {
+                        @Html.ActionLink("+", "ModPartida", new { codigo = Model.jogo.Codigo, posicao = 6 })
+                    }
+                    else if (@Model.jogo.Jogadas[6] == 1)
+                    {
+                        @Html.Label("X");
+                    }
+                    else
+                    {
+                        @Html.Label("0");
+                    }
+
+                </td>
+                <td>
+                    @if (@Model.jogo.Jogadas[7] == 0)
+                    {
+                        @Html.ActionLink("+", "ModPartida", new { codigo = Model.jogo.Codigo, posicao = 7 })
+                    }
+                    else if (@Model.jogo.Jogadas[7] == 1)
+                    {
+                        @Html.Label("X");
+                    }
+                    else
+                    {
+                        @Html.Label("0");
+                    }
+
+                </td>
+                <td>
+                    @if (@Model.jogo.Jogadas[8] == 0)
+                    {
+                        @Html.ActionLink("+", "ModPartida", new { codigo = Model.jogo.Codigo, posicao = 8 })
+                    }
+                    else if (@Model.jogo.Jogadas[8] == 1)
+                    {
+                        @Html.Label("X");
+                    }
+                    else
+                    {
+                        @Html.Label("0");
+                    }
+
+                </td>
+            </tr>
+        </table>
+        <br />
+        } else
+        {
+            <table>
+                <tr>
+                    <td>
+                        @if (@Model.jogo.Jogadas[0] == 0)
+                        {
+                            @Html.Label(" ");
+                        }
+                        else if (@Model.jogo.Jogadas[0] == 1)
+                        {
+                        @Html.Label("X");
+                        }
+                        else
+                        {
+                        @Html.Label("0");
+                        }
+                    </td>
+                    <td>
+                        @if (@Model.jogo.Jogadas[1] == 0)
+                        {
+                            @Html.Label(" ");
+                        }
+                        else if (@Model.jogo.Jogadas[1] == 1)
+                        {
+                        @Html.Label("X");
+                        }
+                        else
+                        {
+                        @Html.Label("0");
+                        }
+                    </td>
+                    <td>
+                        @if (@Model.jogo.Jogadas[2] == 0)
+                        {
+                            @Html.Label(" ");
+                        }
+                        else if (@Model.jogo.Jogadas[2] == 1)
+                        {
+                        @Html.Label("X");
+                        }
+                        else
+                        {
+                        @Html.Label("0");
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @if (@Model.jogo.Jogadas[3] == 0)
+                        {
+                            @Html.Label(" ");
+                        }
+                        else if (@Model.jogo.Jogadas[3] == 1)
+                        {
+                        @Html.Label("X");
+                        }
+                        else
+                        {
+                        @Html.Label("0");
+                        }
+                    </td>
+                    <td>
+                        @if (@Model.jogo.Jogadas[4] == 0)
+                        {
+                            @Html.Label(" ");
+                        }
+                        else if (@Model.jogo.Jogadas[4] == 1)
+                        {
+                        @Html.Label("X");
+                        }
+                        else
+                        {
+                        @Html.Label("0");
+                        }
+                    </td>
+                    <td>
+                        @if (@Model.jogo.Jogadas[5] == 0)
+                        {
+                            @Html.Label(" ");
+                        }
+                        else if (@Model.jogo.Jogadas[5] == 1)
+                        {
+                        @Html.Label("X");
+                        }
+                        else
+                        {
+                        @Html.Label("0");
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @if (@Model.jogo.Jogadas[6] == 0)
+                        {
+                            @Html.Label(" ");
+                        }
+                        else if (@Model.jogo.Jogadas[6] == 1)
+                        {
+                        @Html.Label("X");
+                        }
+                        else
+                        {
+                        @Html.Label("0");
+                        }
+                    </td>
+                    <td>
+                        @if (@Model.jogo.Jogadas[7] == 0)
+                        {
+                            @Html.Label(" ");
+                        }
+                        else if (@Model.jogo.Jogadas[7] == 1)
+                        {
+                        @Html.Label("X");
+                        }
+                        else
+                        {
+                        @Html.Label("0");
+                        }
+                    </td>
+                    <td>
+                        @if (@Model.jogo.Jogadas[8] == 0)
+                        {
+                            @Html.Label(" ");
+                        }
+                        else if (@Model.jogo.Jogadas[8] == 1)
+                        {
+                        @Html.Label("X");
+                        }
+                        else
+                        {
+                        @Html.Label("0");
+                        }
+                    </td>
+                </tr>
+            </table>
+        }
+    </div>
+    @Html.ActionLink("Voltar", "Index")
+</body>
+</html>

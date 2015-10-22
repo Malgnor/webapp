@@ -1,0 +1,26 @@
+﻿@using MyGame.Models
+@model Jogador
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>TicTacToeGame</title>
+</head>
+<body>
+    <div> 
+        Vem Vindo @Model.Nome
+    </div>
+    <div>
+        @Html.ActionLink("New Game","NewGame")
+    </div>
+    <div>
+        @Html.ActionLink("Jogos Abertos", "PartidasAbertas")
+    </div>
+</body>
+</html>

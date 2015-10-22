@@ -1,0 +1,24 @@
+﻿@using MyGame.Models
+
+@model Listagem
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>NewGame</title>
+</head>
+<body>
+    <div> 
+        @foreach(Jogador m in Model.lista){
+            @Html.ActionLink(@m.Nome, "CriaNovaPartida", new { nome = @m.Nome })
+            <br />
+        }
+    </div>
+</body>
+</html>

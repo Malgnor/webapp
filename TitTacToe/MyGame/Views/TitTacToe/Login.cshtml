@@ -1,0 +1,30 @@
+﻿@using MyGame.Models
+@model Jogador
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+</head>
+<body>
+    <div> 
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div>
+        @Html.LabelFor(m => m.Nome)
+        @Html.EditorFor(m => m.Nome)
+    
+        <input type="submit" value="Login" />
+        
+    </div>
+}
+        </div>
+</body>
+</html>
