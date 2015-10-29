@@ -27,11 +27,24 @@
                     }, { scope: "user_friends" });
                 }
             });
+        };
+
+        function logout() {
+            FB.logout(function (res) {
+                alert('Usuario desconectado.');
+            });
+        };
+
+        function atualizarFotoPerfil() {
+            $("#foto-perfil")[0].src = 'https://graph.facebook.com/v2.5/' + usuario.userId + '/picture?type=large';
         }
     </script>
     <input type="button" value="Login" onclick="login()" />
+    <input type="button" value="Logout" onclick="logout()" />
+    <input type="button" value="Foto" onclick="atualizarFotoPerfil()" />
     <div id="user-id">
 
     </div>
+    <img id="foto-perfil" />
 </body>
 </html>
