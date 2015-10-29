@@ -38,10 +38,31 @@
         function atualizarFotoPerfil() {
             $("#foto-perfil")[0].src = 'https://graph.facebook.com/v2.5/' + usuario.userId + '/picture?type=large';
         }
+
+        function postar() {
+            var msg = prompt('Mensagem:');
+            FB.ui({
+                method: 'feed',
+                name: 'PJW',
+                caption: 'Jogue e compartilhe com seus amigos!',
+                description: (msg),
+                link: 'http://www.google.com'
+            }, function (res) {
+                alert(res);
+            });
+        }
+        function listarAmigos() {
+            FB.api('/me/friends', function (response) {
+                console.log(response);
+                alert(response);
+            })
+        };
     </script>
     <input type="button" value="Login" onclick="login()" />
     <input type="button" value="Logout" onclick="logout()" />
     <input type="button" value="Foto" onclick="atualizarFotoPerfil()" />
+    <input type="button" value="Postar" onclick="postar()" />
+    <input type="button" value="Listar" onclick="listarAmigos()" />
     <div id="user-id">
 
     </div>
