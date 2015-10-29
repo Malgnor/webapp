@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="scripts/fb.js"></script>
+    <script>
+        var usuario = {};
+
+        function login() {
+            FB.getLoginStatus(function (res) {
+                if (res.status === 'connected') {
+                    usuario.r = res;
+                    usuario.userId = res.authResponse.userID;
+                    $("#user-id").text('User Id: ' + usuario.userId);
+                } else {
+                    FB.login(function (res) {
+                        usuario.r = res;
+                        if (res.authResponse) {
+                            usuario.userId = res.authResponse.userID;
+                            $("#user-id").text('User Id: ' + usuario.userId);
+                        } else {
+                            alert('Usuário fechou a janela de login.');
+                        }
+                    }, { scope: "user_friends" });
+                }
+            });
+        }
+    </script>
+    <input type="button" value="Login" onclick="login()" />
+    <div id="user-id">
+
+    </div>
+</body>
+</html>
